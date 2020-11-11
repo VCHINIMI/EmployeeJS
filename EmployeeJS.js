@@ -48,14 +48,33 @@ const WAGE_PER_HOUR = 20 ; // Declaring as global for using wage calculator func
     console.log("Aggregate Wage for 20 days = " + empWage);
 }
 
+function calculateDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR ;
+}
+
 //Calculate till Limit : 20 days or 160 Hours
 {
     let empHrs = 0 ;
     let workingDay = 0 ;
+    let empDailyWage = new Array() ;
     while(empHrs <= 160 && workingDay <= 20) {
         let empCheck = Math.floor(Math.random() * 10)%3;
         empHrs = empHrs + getWorkingHours(empCheck);
         workingDay++ ;
+        empDailyWage.push(calculateDailyWage(getWorkingHours(empCheck)));
     }
-    console.log("Wage for Max 20 days or Max 160 hrs is = "+ empHrs*WAGE_PER_HOUR);
+    let empWage = calculateDailyWage(empHrs);
+    console.log("Total days = "+workingDay + " Total Hours  : "+ empHrs + " wage : "+ empWage);
+    console.log(empDailyWage);
+    
+    //SUM FUNCTION
+    let totEmpWage = 0 ;
+    function sum(dailyWage) {
+        totEmpWage = totEmpWage + dailyWage ;
+    }
+    
+    //FOREACH METHOD
+    empDailyWage.forEach(sum) ;
+    console.log(totEmpWage) ;
 }
+
