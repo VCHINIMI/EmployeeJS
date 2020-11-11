@@ -67,7 +67,7 @@ function calculateDailyWage(empHrs) {
     console.log("Total days = "+workingDay + " Total Hours  : "+ empHrs + " wage : "+ empWage);
     console.log(empDailyWage);
     
-    //SUM FUNCTION
+    //SUM FUNCTION USED IN FOREACH
     let totEmpWage = 0 ;
     function sum(dailyWage) {
         totEmpWage = totEmpWage + dailyWage ;
@@ -75,6 +75,40 @@ function calculateDailyWage(empHrs) {
     
     //FOREACH METHOD
     empDailyWage.forEach(sum) ;
-    console.log(totEmpWage) ;
+    console.log("TOTAL WAGE BY FOREACH : "+ totEmpWage) ;
+    console.log("\n");
+
+    //REDUCE METHOD
+    let empTotalWageByReduce = empDailyWage.reduce((acc,val)=>acc+val,0);
+    console.log("TOTAL WAGE BY REDUCE : "+ empTotalWageByReduce);
+    console.log("\n");
+
+    //MAP METHOD
+    let dayCount = 0 ;
+    let mapArray = empDailyWage.map(empDily => "Wage for Day "+ (++dayCount) + " is : "+ empDily);
+    console.log(mapArray);
+    console.log("\n");
+
+    //FILTER METHOD TO CHECK FOR 160 WAGE
+    let filterArray = mapArray.filter(emp => emp.includes("160"));
+    console.log(filterArray);
+    console.log("\n");
+
+    //FIND METHOD    
+    let findArray = filterArray.find(emp => emp.includes("160"));
+    console.log(findArray);
+    console.log("\n");
+
+    //CHECK IF EVERY FULLTIME WAGE HAS 160
+    let boolVal = filterArray.every(emp => emp.includes("160"));
+    console.log("EVERY VALUE IN FILTER ARRAY HAS 160 AS WAGE (TRUE/FALSE) : " + boolVal);
+
+    //CHECK IF SOME WAGE IS NOT 160
+    let boolVal2 = filterArray.some(emp => emp.includes("80"));
+    console.log("SOME VALUE IN FILTER ARRAY HAS 80 AS WAGE (TRUE/FALSE) : " + boolVal2);
+
+    //TOTAL DAYS WORKED (USED REDUCE METHOD)
+    let value1 = empDailyWage.reduce( (acc,val) => (val>0)? acc+1 : acc , 0);
+    console.log("Total days worked : "+ value1);
 }
 
