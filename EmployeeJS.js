@@ -54,14 +54,18 @@ function calculateDailyWage(empHrs) {
 
 //Calculate till Limit : 20 days or 160 Hours
 {
+    let wageMap = new Map() ;
     let empHrs = 0 ;
     let workingDay = 0 ;
     let empDailyWage = new Array() ;
+    
     while(empHrs <= 160 && workingDay <= 20) {
         let empCheck = Math.floor(Math.random() * 10)%3;
         empHrs = empHrs + getWorkingHours(empCheck);
         workingDay++ ;
-        empDailyWage.push(calculateDailyWage(getWorkingHours(empCheck)));
+        let wage = calculateDailyWage(getWorkingHours(empCheck));
+        empDailyWage.push(wage);
+        wageMap.set(workingDay, wage);
     }
     let empWage = calculateDailyWage(empHrs);
     console.log("Total days = "+workingDay + " Total Hours  : "+ empHrs + " wage : "+ empWage);
@@ -110,5 +114,8 @@ function calculateDailyWage(empHrs) {
     //TOTAL DAYS WORKED (USED REDUCE METHOD)
     let value1 = empDailyWage.reduce( (acc,val) => (val>0)? acc+1 : acc , 0);
     console.log("Total days worked : "+ value1);
-}
 
+    //MAP
+   let calSum = Array.from(wageMap.values()).reduce((acc, val) => acc+val,0);
+   console.log(calSum);
+}
